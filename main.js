@@ -323,10 +323,21 @@ function translateWords(words,breaks)
         {
             var key = words[x].toLowerCase().replace(/[^A-Za-z]+/g, '');
 
-            if( tokiWords[key] != undefined )
+            if( tokiWords[key] != undefined ) {
                 output += '<span title="'+tokiWords[key]+'">'+words[x]+' ('+tokiWordsShort[key]+')</span>&nbsp;';
-            else
-                output += '<span class="not-toki" title="Could not find match">'+words[x]+'</span>&nbsp;';
+            } else {
+                var foundEnglish = false;
+                for( y in tokiWords ) {
+                    if( tokiWords[y].toLowerCase().replaceAll("\n",' ').replaceAll(',','').split(' ').includes(key) ) {
+                        foundEnglish = true;
+                        output += '<span class="english" title="' + tokiWords[y] + '">'+words[x]+' (' + y + ')</span>&nbsp;';
+                        break;
+                    }
+                }
+
+                if( !foundEnglish )
+                    output += '<span class="not-toki" title="Could not find match">'+words[x]+'</span>&nbsp;';
+            }
         }
         if( breaks && x != words.length-1 )
             output += '<br>';
