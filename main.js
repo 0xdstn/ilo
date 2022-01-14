@@ -325,7 +325,7 @@ function processWords(words)
         {
             if( words[x].indexOf("\n") !== -1 )
             {
-                url += (x!=0?'%20':'')+words[x].replace(/ /g,'%20').replace('\n','\\n');
+                url += (x!=0?'%20':'')+words[x].replace(/ /g,'%20').replaceAll('\n','\\n');
                 output += translateWords(words[x].split("\n"),true);
             }
             else
