@@ -1,3 +1,7 @@
+if('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+};
+
 var tokiWords = {
     "a" : "interj ah, ha, uh, oh, ooh, aw, well (emotion word)",
     "akesi" : "n non-cute animal, reptile, amphibian",
@@ -52,6 +56,7 @@ var tokiWords = {
     "li" : "sep (between any subject except mi and sina and its verb; also used to introduce a new verb for the same subject)",
     "lili" : "mod small, little, young, a bit, short, few, less\nvt reduce, shorten, shrink, lessen",
     "linja" : "n long, very thin, floppy thing, e.g. string, rope, hair, thread, cord, chain",
+    "linluwi" : "internet",
     "lipu" : "n flat and bendable thing, e.g. paper, card, ticket",
     "loje" : "mod red",
     "lon" : "prep be (located) in/at/on\nvi be there, be present, be real/true, exist, be awake",
@@ -193,6 +198,7 @@ var tokiWordsShort = {
     "li" : "sep",
     "lili" : "small",
     "linja" : "long/thin",
+    "linluwi" : "internet",
     "lipu" : "flat",
     "loje" : "red",
     "lon" : "present/awake",
@@ -284,11 +290,12 @@ var tokiWordsShort = {
 
 var search = window.location.search;
 var textarea = document.getElementById("text");
+var def = document.getElementById("definition");
 
 if( search.indexOf('?t=') !== -1 )
 {
-    var words = search.replace('\?t=','').replace(/\\n/g,"\n").split('%20');
-    textarea.value = search.replace('\?t=','').replace(/\\n/g,"\n").replace(/%20/g,' ');
+    var words = decodeURIComponent(search.replace('\?t=','')).replace(/\\n/g,"\n").split('%20');
+    textarea.value = decodeURIComponent(search.replace('\?t=','')).replace(/\\n/g,"\n").replace(/%20/g,' ');
     processWords(words);
 }
 
@@ -302,6 +309,21 @@ for( x in tokiWords )
     dictOutput += '<dt>'+x+'</dt><dd>'+tokiWords[x].replace(/\n/g,'<br>')+'</dd>'
 }
 dict.innerHTML = dictOutput;
+
+addWordListeners();
+
+function addWordListeners() {
+    def.innerHTML = '';
+    def.classList.remove('show');
+    document.querySelectorAll(".toki-word").forEach(x => x.addEventListener("click", clickWord, false));
+}
+
+function clickWord(e) {
+    e.preventDefault();
+    var key = e.target.getAttribute('data-key');
+    def.classList.add('show');
+    def.innerHTML = '<strong>' + key + ':<br></strong>' + tokiWords[key];
+}
 
 function toggleDict(e) {
     e.preventDefault();
@@ -325,22 +347,24 @@ function processWords(words)
         {
             if( words[x].indexOf("\n") !== -1 )
             {
-                url += (x!=0?'%20':'')+words[x].replace(/ /g,'%20').replaceAll('\n','\\n');
+                url += (x!=0?'%20':'')+encodeURIComponent(words[x].replaceAll('\n','\\n'));
                 output += translateWords(words[x].split("\n"),true);
             }
             else
             {
-                url += (x!=0?'%20':'')+words[x];
+                url += (x!=0?'%20':'')+encodeURIComponent(words[x]);
                 output += translateWords([words[x]],false);
             }
         }
     }
 
-    output += '<br><br><p>Permalink: <a href="'+url+'">'+url+'</a></p>';
+    output += '<br><p>Permalink: <a href="'+url+'">'+url+'</a></p>';
 
     window.history.replaceState( {} , '', url );
 
     document.getElementById("output").innerHTML = output;
+
+    addWordListeners();
 }
 
 function translateWords(words,breaks)
@@ -353,7 +377,7 @@ function translateWords(words,breaks)
             var key = words[x].toLowerCase().replace(/[^A-Za-z]+/g, '');
 
             if( tokiWords[key] != undefined ) {
-                output += '<span title="'+tokiWords[key]+'">'+words[x]+' ('+tokiWordsShort[key]+')</span>&nbsp;';
+                output += '<span class="toki-word '+key+'" data-key="'+key+'" title="'+tokiWords[key]+'"><span class="linja">'+key+'</span> '+words[x]+' ('+tokiWordsShort[key]+')</span>&nbsp;';
             } else {
                 var foundEnglish = false;
                 for( y in tokiWords ) {

@@ -1,3 +1,4 @@
+@font-face { font-family: linjapona; src: url("linja-pona-4.9.otf") format("opentype"); }
 html, body { height: 100%; margin: 0; padding: 0; width: 100%; }
 body { background: #1c1c1c; font-family: monospace; font-size: 14px; letter-spacing: 1px; line-height: 1.75em; color: #fff;}
 #container { box-sizing: border-box; padding: 1em; }
@@ -10,3 +11,7 @@ a:hover { color: #c2c2c2; border-color: transparent; }
 dt { font-weight: 700; color: #fff; }
 dd { display: block; margin: 0 0 1em 0; }
 textarea { display: block; padding: .5em; width: 100%; box-sizing: border-box; }
+.toki-word { cursor: pointer; }
+#definition { display: none; background: #666; padding: .5em; box-sizing: border-box; }
+#definition.show { display: block; }
+#output span.linja { font-family: 'linjapona'; letter-spacing: 0; font-size: 1.5em; margin: 0; position: relative; top: 2px; }
