@@ -5,7 +5,7 @@ body { background: #1c1c1c; font-family: monospace; font-size: 14px; letter-spac
 a { color: #fff; font-weight: 700; text-decoration: none; border-bottom: solid 1px #fff; padding-bottom: 2px; }
 a:hover { color: #c2c2c2; border-color: transparent; }
 #output span { display: inline-block; background: #00aaee; padding: 0 5px; margin-bottom: 1em; }
-#output span.english { background: #333; }
+#output span.english { background: #333; cursor: pointer; }
 #output span.not-toki { background: #96281b; }
 .collapse { display: none; }
 dt { font-weight: 700; color: #fff; }

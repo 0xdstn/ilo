@@ -1,4 +1,4 @@
-const cacheName = 'ilo-v2';
+const cacheName = 'ilo-v3';
 const appFiles = [
     '/~dustin/ilo/',
     '/~dustin/ilo/index.html',

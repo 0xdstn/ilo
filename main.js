@@ -316,6 +316,7 @@ function addWordListeners() {
     def.innerHTML = '';
     def.classList.remove('show');
     document.querySelectorAll(".toki-word").forEach(x => x.addEventListener("click", clickWord, false));
+    document.querySelectorAll(".english").forEach(x => x.addEventListener("click", clickWord, false));
 }
 
 function clickWord(e) {
@@ -377,13 +378,13 @@ function translateWords(words,breaks)
             var key = words[x].toLowerCase().replace(/[^A-Za-z]+/g, '');
 
             if( tokiWords[key] != undefined ) {
-                output += '<span class="toki-word '+key+'" data-key="'+key+'" title="'+tokiWords[key]+'"><span class="linja">'+key+'</span> '+words[x]+' ('+tokiWordsShort[key]+')</span>&nbsp;';
+                output += '<span class="toki-word '+key+'" data-key="'+key+'" title="'+tokiWords[key]+'"><span class="linja" data-key="'+key+'">'+key+'</span> '+words[x]+' ('+tokiWordsShort[key]+')</span>&nbsp;';
             } else {
                 var foundEnglish = false;
                 for( y in tokiWords ) {
                     if( tokiWords[y].toLowerCase().replaceAll("\n",' ').replaceAll(',','').split(' ').includes(key) ) {
                         foundEnglish = true;
-                        output += '<span class="english" title="' + tokiWords[y] + '">'+words[x]+' (' + y + ')</span>&nbsp;';
+                        output += '<span class="english" data-key="'+y+'" title="' + tokiWords[y] + '">'+words[x]+' (<span class="english linja" data-key="'+y+'">'+y+'</span> ' + y + ')</span>&nbsp;';
                         break;
                     }
                 }
