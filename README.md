@@ -4,4 +4,4 @@ This is a simple tool that allows you to input Toki Pona, and it will provide yo
 
 It also allows you to input English, and it will do it's best to translate it back to toki pona using the words in each definition.
 
-Live version: [http://tilde.town/~dustin/ilo/](http://tilde.town/~dustin/ilo/)
+Live version: [https://0xdstn.site/ilo/](https://0xdstn.site/ilo/)
