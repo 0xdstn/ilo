@@ -1,14 +1,14 @@
-const cacheName = 'ilo-v3';
+const cacheName = 'ilo-v3a';
 const appFiles = [
-    '/~dustin/ilo/',
-    '/~dustin/ilo/index.html',
-    '/~dustin/ilo/main.js',
-    '/~dustin/ilo/style.css',
-    '/~dustin/ilo/icon32.png',
-    '/~dustin/ilo/icon144.png',
-    '/~dustin/ilo/icon192.png',
-    '/~dustin/ilo/icon512.png',
-    '/~dustin/ilo/linja-pona-4.9.otf'
+    '/ilo/',
+    '/ilo/index.html',
+    '/ilo/main.js',
+    '/ilo/style.css',
+    '/ilo/icon32.png',
+    '/ilo/icon144.png',
+    '/ilo/icon192.png',
+    '/ilo/icon512.png',
+    '/ilo/linja-pona-4.9.otf'
 ];
 
 self.addEventListener('install', (e) => {

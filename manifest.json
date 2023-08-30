@@ -24,8 +24,8 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/~dustin/ilo/",
-  "scope": "/~dustin/ilo/",
+  "start_url": "/ilo/",
+  "scope": "/ilo/",
   "display": "standalone",
   "theme_color": "#1c1c1c",
   "background_color": "#1c1c1c"
